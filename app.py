@@ -11,10 +11,6 @@ CORS(app)
 def home():
     return 'News API is UP!<br><br>A part of <a href="https://t.me/sjprojects">Sj Projects</a>'
 
-@app.route('/news')
-def news():
-    if request.method == 'GET':
-        return jsonify(getNews(request.args.get('category')))
 
 @app.route('/weather')
 def weather():
