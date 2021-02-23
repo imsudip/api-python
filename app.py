@@ -1,6 +1,6 @@
 #Coded by Sumanjay on 29th Feb 2020
 from flask import Flask, request, jsonify
-from weather import getNews,getWeather
+from weather import getWeather
 from flask_cors import CORS
 
 app = Flask(__name__)
