@@ -3,7 +3,7 @@ from weather import getWeather
 from zedge import zGetTrendingRintones,zGetSearchResultsRingtones,zGetRelatedSearches
 from ring import ringtone as r
 from flask_cors import CORS
-
+from weather2 import getAccuweather
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
 CORS(app)
@@ -30,6 +30,11 @@ def weather():
     if request.method == 'GET':
         return jsonify(getWeather(request.args.get('city')))
 
+# weather api2
+@app.route('/accuweather')
+def accuweather():
+    if request.method == 'GET':
+        return jsonify(getAccuweather(request.args.get('city'),request.args.get('page')))
 # zedge ringtone api
 
 @app.route('/zedgeRingtonesAll')
