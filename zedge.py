@@ -1,6 +1,5 @@
 import requests
 
-
 def zGetTrendingUrl(page):
     p = (int(page)-1)*48
     return f'https://www.zedge.net/api-zedge-web/browse/trending?cursor=1:dSgtAg:{p}&section=home-ringtones&contentType=ringtones'
@@ -31,7 +30,10 @@ def zGetTrendingRintones(page):
         ringtoneResult['success'] = False
         ringtoneResult['error'] = str(e.strerror)
         return ringtoneResult
-    return htmlBody.json()
+    ringtoneResult['data']=htmlBody.json()
+    if not htmlBody.json()['items']:
+        ringtoneResult['success']=False
+    return ringtoneResult
 
 
 def zGetSearchResultsRingtones(query, page):
@@ -45,7 +47,7 @@ def zGetSearchResultsRingtones(query, page):
     url = zGetSearchResultsUrl(query, page)
     ringtoneResult = {
         'success': True,
-        'data':True
+        
     }
     try:
         htmlBody = requests.request("GET", url, headers=headers)
@@ -53,10 +55,16 @@ def zGetSearchResultsRingtones(query, page):
         ringtoneResult['success'] = False
         ringtoneResult['error'] = str(e.strerror)
         return ringtoneResult
-    i
-    return htmlBody.json()
+    ringtoneResult['data']=htmlBody.json()
+    if not htmlBody.json()['items']:
+        ringtoneResult['success']=False
+    return ringtoneResult
 
 def zGetRelatedSearches(query):
+    ringtoneResult = {
+        'success': True,
+
+    }
     headers = {
         "Accept":	"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":	"gzip, deflate, br",
@@ -71,4 +79,7 @@ def zGetRelatedSearches(query):
         ringtoneResult['success'] = False
         ringtoneResult['error'] = str(e.strerror)
         return ringtoneResult
-    return htmlBody.json()
+    ringtoneResult['data']=htmlBody.json()
+    if not htmlBody.json()['items']:
+        ringtoneResult['success']=False
+    return ringtoneResult

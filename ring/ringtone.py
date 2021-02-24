@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote
-from getFromSection import getAllFromSection
-from category import getCategoriesUrl
+from ring import getFromSection as sec
+from ring import category as cat
+
 def getTrendingRingtones():
     ringtoneResult = {
         'success': True,
@@ -18,7 +19,7 @@ def getTrendingRingtones():
     soup = BeautifulSoup(htmlBody.content, 'lxml')
     cards = soup.find_all('div', class_='home-section')
     for card in cards:
-        section = getAllFromSection(card)
+        section = sec.getAllFromSection(card)
         if section != None:
             ringtoneResult['sections'].append(section)
 
@@ -29,7 +30,7 @@ def getRingtonesFromCat(cat,page):
         'success': True,
         'sections': []
     }
-    url=getCategoriesUrl(cat)+'?&per_page='+str((int(page)-1)*24)
+    url=cat.getCategoriesUrl(cat)+'?&per_page='+str((int(page)-1)*24)
     print(url)
     try:
         htmlBody = requests.get(url)
@@ -47,7 +48,7 @@ def getRingtonesFromCat(cat,page):
     ringtoneResult['total pages'] =(int(upages)//24)   
     cards = soup.find_all('div', class_='home-section v')
     for card in cards:
-        section = getAllFromSection(card)
+        section = sec.getAllFromSection(card)
         if section != None:
             ringtoneResult['sections'].append(section)
     return ringtoneResult
