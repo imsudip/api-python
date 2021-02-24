@@ -16,16 +16,16 @@ Api scraped from **https://www.zedge.net/**
 
     /zedgeRingtonesAll?page={page_no}
 
-> For getting trending ringtones
+> For getting trending ringtones,
 > **{page_no}**=page number
 
     /zedgeSearch?q={query}&page={page_no}
-   > For getting search results from keywords
-> **{page_no}**=page number
+   > For getting search results from keywords,
+> **{page_no}**=page number,
 > **{query}**=query
 
     /zedgeRelatedSearches?q={query}
-   > For getting related tags from keyword
+   > For getting related tags from keyword,
 > **{qeury}**=qeury
 
 # Ringtone API
@@ -39,8 +39,8 @@ Api scraped from **https://bestringtones.net/**
 
 
     /ringtones?q={query}&page={page_no}
-   > For getting search results from keywords
-   > For getting results from categories
+   > For getting search results from keywords,
+   > For getting results from categories,
 > **{page_no}**=page number
 > **{query}**=query
 
