@@ -44,6 +44,7 @@ Api scraped from **https://bestringtones.net/**
 > **{page_no}**=page number
 > **{query}**=query
 
+    mention the categories in lowercase
     -   Top
     -   Popular
     -   2021
