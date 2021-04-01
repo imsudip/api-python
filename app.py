@@ -5,6 +5,7 @@ from ring import ringtone as r
 from flask_cors import CORS
 from weather2 import getAccuweather
 from wikipedia import wikiFind
+from wikiSearch import searchQ
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
 CORS(app)
@@ -68,6 +69,12 @@ def zedgeRelatedSearches():
 def wiki():
     if request.method == 'GET':
         return jsonify(wikiFind(request.args.get('link')))
+
+
+@app.route('/wikisearch')
+def wikisearch():
+    if request.method == 'GET':
+        return jsonify(searchQ(request.args.get('q')))
 
 
 if __name__ == '__main__':
