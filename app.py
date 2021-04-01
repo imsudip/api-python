@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 from weather import getWeather
-from zedge import zGetTrendingRintones,zGetSearchResultsRingtones,zGetRelatedSearches
+from zedge import zGetTrendingRintones, zGetSearchResultsRingtones, zGetRelatedSearches
 from ring import ringtone as r
 from flask_cors import CORS
 from weather2 import getAccuweather
+from wikipedia import wikiFind
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
 CORS(app)
@@ -14,10 +15,13 @@ def home():
     return "API is UP!<br><br>A part of @imsudip's project"
 
 # ringtone.net api
+
+
 @app.route('/ringtonesHome')
 def ringtonesHome():
     if request.method == 'GET':
         return jsonify(r.getTrendingRingtones())
+
 
 @app.route('/ringtones')
 def ringtones():
@@ -25,33 +29,45 @@ def ringtones():
         return jsonify(r.getRingtonesFromCat(request.args.get('q'), request.args.get('page')))
 
 # weather api
+
+
 @app.route('/weather')
 def weather():
     if request.method == 'GET':
         return jsonify(getWeather(request.args.get('city')))
 
 # weather api2
+
+
 @app.route('/accuweather')
 def accuweather():
     if request.method == 'GET':
-        return jsonify(getAccuweather(request.args.get('city'),request.args.get('page')))
+        return jsonify(getAccuweather(request.args.get('city'), request.args.get('page')))
 # zedge ringtone api
+
 
 @app.route('/zedgeRingtonesAll')
 def zedgeRingtonesAll():
     if request.method == 'GET':
         return jsonify(zGetTrendingRintones(request.args.get('page')))
 
+
 @app.route('/zedgeSearch')
 def zedgeSearch():
     if request.method == 'GET':
-        return jsonify(zGetSearchResultsRingtones(request.args.get('q'),request.args.get('page')))
+        return jsonify(zGetSearchResultsRingtones(request.args.get('q'), request.args.get('page')))
+
 
 @app.route('/zedgeRelatedSearches')
 def zedgeRelatedSearches():
     if request.method == 'GET':
         return jsonify(zGetRelatedSearches(request.args.get('q')))
 
+
+@app.route('/wiki')
+def wiki():
+    if request.method == 'GET':
+        return jsonify(wikiFind(request.args.get('link')))
 
 
 if __name__ == '__main__':
