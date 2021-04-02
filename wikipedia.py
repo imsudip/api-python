@@ -15,6 +15,7 @@ def wikiFind(link):
     mainHyperlink = ""
     mainTitle = ''
     summary = ''
+    highlight = ""
     for aTag in aTags:
         if aTag.has_attr('class'):
             c = aTag.get("class")
@@ -22,6 +23,7 @@ def wikiFind(link):
                 mainHyperlink = aTag.get('href')
                 mainTitle = aTag.get('title')
                 summary = aTag.find_parent('p').text
+                highlight = aTag.text
                 break
             else:
                 continue
@@ -30,12 +32,14 @@ def wikiFind(link):
             mainHyperlink = aTag.get('href')
             mainTitle = aTag.get('title')
             summary = aTag.find_parent('p').text
+            highlight = aTag.text
             break
 
     ll = baseUrl + mainHyperlink
     data = {
         "title": mainTitle,
         "link": ll,
-        "summary": summary
+        "summary": summary,
+        "highlight": highlight
     }
     return data
