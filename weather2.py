@@ -19,21 +19,18 @@ def getAccuweather(city, page):
         # "Accept-Encoding":	"gzip, deflate, br",
         # "Accept-Language":	"en-US,en;q=0.5",
         # "Host":	"www.accuweather.com",
-        # "User-Agent":	"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
     }
 
     apiUrl = f'https://www.accuweather.com/web-api/autocomplete?query={city}&language=en-us'
-    try:
-
-        apiRes = requests.request("GET", apiUrl, headers=headers)
-        key = apiRes.json()[0]['key']
-        print(key)
-    except requests.exceptions.RequestException as e:
-        weatherReport['success'] = False
-        weatherReport['error'] = str(e.strerror)
-        return weatherReport
+    apiRes = requests.request("GET", apiUrl, headers=headers)
+    print(apiRes)
+    key = apiRes.json()[0]['key']
+    print(key)
     url = f'https://www.accuweather.com/en/in/{city}/{key}/daily-weather-forecast/{key}?page={page}'
+    print(url)
     h = requests.request("GET", url, headers=headers)
+    print(h.content)
     soup = BeautifulSoup(h.content, 'lxml')
     dateRange = soup.find('p', class_='module-title').text
     print(dateRange)
