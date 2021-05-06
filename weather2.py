@@ -15,11 +15,11 @@ def getAccuweather(city, page):
         'data': []
     }
     headers = {
-        "Accept":	"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Encoding":	"gzip, deflate, br",
-        "Accept-Language":	"en-US,en;q=0.5",
-        "Host":	"www.accuweather.com",
-        "User-Agent":	"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0"
+        # "Accept":	"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        # "Accept-Encoding":	"gzip, deflate, br",
+        # "Accept-Language":	"en-US,en;q=0.5",
+        # "Host":	"www.accuweather.com",
+        # "User-Agent":	"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0"
     }
 
     apiUrl = f'https://www.accuweather.com/web-api/autocomplete?query={city}&language=en-us'
