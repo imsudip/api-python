@@ -81,7 +81,7 @@ def wikisearch():
 @app.route('/leetCodeCompile')
 def leetCodeCompile():
     if request.method == 'GET':
-        getLeetToken(request.args.get('lang'), request.args.get(
+        return getLeetToken(request.args.get('lang'), request.args.get(
             'code'), request.args.get('input'))
     # if request.method == 'POST':
     #     return getLeetToken(request.form['lang'], request.form['code'], request.form['input'])
