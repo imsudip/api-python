@@ -6,6 +6,7 @@ from flask_cors import CORS
 from weather2 import getAccuweather
 from wikipedia import wikiFind
 from wikiSearch import searchQ
+from judge import getLeetToken, checkLeetStatus
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
 CORS(app)
@@ -75,6 +76,18 @@ def wiki():
 def wikisearch():
     if request.method == 'GET':
         return jsonify(searchQ(request.args.get('q')))
+
+
+@app.route('/leetCodeCompile')
+def leetCodeCompile():
+    if request.method == 'POST':
+        return getLeetToken(request.form['lang'], request.form['code'], request.form['input'])
+
+
+@app.route('/leetCodeCheck')
+def leetCodeCheck():
+    if request.method == 'GET':
+        return jsonify(checkLeetStatus(request.args.get('token')))
 
 
 if __name__ == '__main__':
